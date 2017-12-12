@@ -6,6 +6,8 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -20,7 +22,9 @@ import java.util.Arrays;
 @Component
 public class LogAspect {
 
-    @Pointcut(value = "@annotation(org.moier.aop.Action)")
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
+
+    @Pointcut(value = "@annotation(org.moier.aop.annotations.Action)")
     public void annotationPointCut() {
     }
 
@@ -29,8 +33,10 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         Object args[] = joinPoint.getArgs();
-        System.out.println(Arrays.toString(args));
-        System.out.println("拦截方法:" + method.getName());
+        LOGGER.info("------------------------------------");
+        LOGGER.info("the method of proxy {}",method.getName());
+        LOGGER.info("the method args {}",Arrays.toString(args));
+
 
     }
 
@@ -38,7 +44,7 @@ public class LogAspect {
     @AfterReturning(value = "annotationPointCut()",returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint,Object returnObj){
 
-        System.out.println("攔截方法返回的結果為："+returnObj);
+        LOGGER.info("the method return {}",returnObj);
 
     }
 

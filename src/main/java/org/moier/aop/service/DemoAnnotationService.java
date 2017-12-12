@@ -1,6 +1,8 @@
 package org.moier.aop.service;
 
-import org.moier.aop.Action;
+import org.moier.aop.annotations.Action;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoAnnotationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoAnnotationService.class);
+
     @Value("${book.author}")
     private String bookAuthor;
 
@@ -20,10 +24,10 @@ public class DemoAnnotationService {
 
     @Action(name = "sayHello")
     public String sayHello(String person) {
-        String result = person + "say hello world";
-        System.out.println(result);
-        System.out.println("book author : "+bookAuthor);
-        System.out.println("book name : "+bookName);
+        String result = person + " say hello world";
+        LOGGER.debug("book author {}", this.bookAuthor);
+        LOGGER.debug("book name {}", this.bookName);
+        LOGGER.debug("person = {}",person);
         return result;
     }
 }

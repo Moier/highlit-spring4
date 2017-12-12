@@ -1,4 +1,4 @@
-package org.moier.aop;
+package org.moier.aop.annotations;
 
 import java.lang.annotation.*;
 
