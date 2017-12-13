@@ -1,6 +1,7 @@
 package org.moier.config;
 
 import org.springframework.context.annotation.*;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @Description:
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.*;
 @ComponentScan(basePackages = {"org.moier"})
 @EnableAspectJAutoProxy
 @PropertySource("classpath:/test.properties")
+@EnableScheduling
 public class SpringConfig {
 
 

@@ -23,8 +23,14 @@ public class UseFunctionServiceTest extends BaseTest{
 
 
     @Test
-    public void testSayHello(){
+    public void testSayHello() throws Exception{
         demoAnnotationService.sayHello("hhs ");
+
+        try {
+            Thread.sleep(10000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
